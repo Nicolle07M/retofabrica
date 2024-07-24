@@ -11,7 +11,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     #      ddl-auto: none
 
     properties:
@@ -20,3 +20,5 @@ spring:
     show-sql: true
   main:
     allow-circular-references: true
+server:
+  port: 3001
