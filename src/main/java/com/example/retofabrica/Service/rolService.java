@@ -2,8 +2,8 @@ package com.example.retofabrica.Service;
 
 import com.example.retofabrica.Entity.rolEntity;
 import com.example.retofabrica.Service.Dao.Idao;
-import com.example.retofabrica.Repository.rolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.example.retofabrica.Repository.rolRepository;
 
 import java.util.List;
 

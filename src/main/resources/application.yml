@@ -21,4 +21,4 @@ spring:
   main:
     allow-circular-references: true
 server:
-  port: 3001
+  port: 3005

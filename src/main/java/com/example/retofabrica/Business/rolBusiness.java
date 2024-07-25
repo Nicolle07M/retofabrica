@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class rolBusiness {
+
     @Autowired
     private rolRepository rolRepository;
 
@@ -34,9 +35,7 @@ public class rolBusiness {
     public rolEntity updateRol(Long id, rolEntity rolDetails) {
         return rolRepository.findById(id)
                 .map(existingRol -> {
-                    // Actualiza los campos necesarios sin cambiar el ID
                     existingRol.setRolType(rolDetails.getRolType());
-                    // Puedes actualizar otros campos si es necesario
                     return rolRepository.save(existingRol);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Rol not found with id " + id));
