@@ -17,5 +17,5 @@ public class userDto {
     private String address;
     private Long phone;
     private String password;
-    private String status;
+    private Boolean status;
 }
