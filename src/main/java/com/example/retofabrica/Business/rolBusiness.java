@@ -16,7 +16,7 @@ public class rolBusiness {
     private rolRepository rolRepository;
 
     //get all rol
-    public List<rolEntity> getAllrol(){
+    public List<rolEntity> getAllRol(){
         return rolRepository.findAll();
     }
 

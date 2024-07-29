@@ -14,8 +14,8 @@ public class rolController {
     private rolBusiness rolBusiness;
 
     @GetMapping
-    public List<rolEntity> getAllrol() {
-        return rolBusiness.getAllrol();
+    public List<rolEntity> getAllRol() {
+        return rolBusiness.getAllRol();
     }
 
     @GetMapping("/{id_Rol}")

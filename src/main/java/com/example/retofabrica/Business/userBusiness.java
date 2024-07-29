@@ -40,18 +40,23 @@ public class userBusiness {
 
     //update user
     public userEntity updateUser(Long id, userEntity userDetails) {
-        return userRepository.findById(id)
-                .map(existingUser -> {
-                    existingUser.setName(userDetails.getName());
-                    existingUser.setLastName(userDetails.getLastName());
-                    existingUser.setAddress(userDetails.getAddress());
-                    existingUser.setPhone(userDetails.getPhone());
-                    existingUser.setEmail(userDetails.getEmail());
-                    existingUser.setStatus(userDetails.getStatus()); // Actualizar el estado
-                    return userRepository.save(existingUser);
-                })
-                .orElseThrow(() -> new RuntimeException("User not found with id " + id));
+        userEntity existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        existingUser.setName(userDetails.getName());
+        existingUser.setLastName(userDetails.getLastName());
+        existingUser.setAddress(userDetails.getAddress());
+        existingUser.setPhone(userDetails.getPhone());
+        existingUser.setEmail(userDetails.getEmail());
+        existingUser.setStatus(userDetails.getStatus());
+        existingUser.setRol(userDetails.getRol());
+
+        // Handle role update
+
+
+        return userRepository.save(existingUser);
     }
+
 
 
     // delete

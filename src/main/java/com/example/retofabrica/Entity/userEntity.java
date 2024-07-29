@@ -41,5 +41,11 @@ public class userEntity implements Serializable {
 
     @Column(name = "status")
     private Boolean status; // Asegúrate de que este campo sea Boolean
+
+    @ManyToOne
+    @JoinColumn(name = "id_Rol")
+    private rolEntity rol; // Relación con la entidad rolEntity
+
+
 }
 
