@@ -30,26 +30,29 @@ public class userBusiness {
 
 
     //Create new user
-    public userEntity createUser(userEntity user){
+    public userEntity createUser(userEntity user) {
+        // Asignar un valor predeterminado a 'status' si es null
+        if (user.getStatus() == null) {
+            user.setStatus(false); // Asumir que false es el valor predeterminado
+        }
         return userRepository.save(user);
     }
-
 
     //update user
     public userEntity updateUser(Long id, userEntity userDetails) {
-        userEntity user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
-        user.setName(userDetails.getName());
-        user.setLastName(userDetails.getLastName());
-        user.setEmail(userDetails.getEmail());
-        user.setAddress(userDetails.getAddress());
-        user.setPhone(userDetails.getPhone());
-        user.setPassword(userDetails.getPassword());
-        user.setStatus(userDetails.getStatus());
-
-        return userRepository.save(user);
-
+        return userRepository.findById(id)
+                .map(existingUser -> {
+                    existingUser.setName(userDetails.getName());
+                    existingUser.setLastName(userDetails.getLastName());
+                    existingUser.setAddress(userDetails.getAddress());
+                    existingUser.setPhone(userDetails.getPhone());
+                    existingUser.setEmail(userDetails.getEmail());
+                    existingUser.setStatus(userDetails.getStatus()); // Actualizar el estado
+                    return userRepository.save(existingUser);
+                })
+                .orElseThrow(() -> new RuntimeException("User not found with id " + id));
     }
+
 
     // delete
     public void deleteUser(Long id) {
