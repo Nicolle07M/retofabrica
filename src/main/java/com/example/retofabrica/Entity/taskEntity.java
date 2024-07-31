@@ -21,7 +21,7 @@ public class taskEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_task", nullable = false)
-    private Long id;
+    private Long idTask;
 
     @Column(name = "title", nullable = false)
     private String title;
