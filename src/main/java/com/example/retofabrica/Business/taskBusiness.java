@@ -1,36 +1,44 @@
 package com.example.retofabrica.Business;
 
 import com.example.retofabrica.Entity.taskEntity;
-import com.example.retofabrica.Service.taskService;
+import com.example.retofabrica.Repository.taskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class taskBusiness {
 
     @Autowired
-    private taskService taskService;
+    private taskRepository taskRepository;
 
     public List<taskEntity> getAllTasks() {
-        return taskService.getAllTasks();
+        return taskRepository.findAll();
     }
 
     public Optional<taskEntity> getTaskById(Long id) {
-        return taskService.getTaskById(id);
+        return taskRepository.findById(id);
     }
 
     public taskEntity createTask(taskEntity task) {
-        return taskService.createTask(task);
+        return taskRepository.save(task);
     }
 
     public Optional<taskEntity> updateTask(Long id, taskEntity taskDetails) {
-        return taskService.updateTask(id, taskDetails);
+        return taskRepository.findById(id)
+                .map(task -> {
+                    task.setTitle(taskDetails.getTitle());
+                    task.setDescription(taskDetails.getDescription());
+                    task.setDueDate(taskDetails.getDueDate());
+                    task.setStatus(taskDetails.getStatus());
+                    task.setUser(taskDetails.getUser());
+                    return taskRepository.save(task);
+                });
     }
 
     public void deleteTask(Long id) {
-        taskService.deleteTask(id);
+        taskRepository.deleteById(id);
     }
 }
